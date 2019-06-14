@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draw</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+        #content {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+        #canvas {
+            background: orange
+        }
+        #tools {
+            margin: 0;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            align-content: center;
+            background: yellow
+        }
+        #tools li {
+            list-style: none;
+            margin: 1em;
+        }
+        #colors {
+            margin: 0;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            align-content: center;
+            background: gray;
+        }
+        #colors li {
+            list-style: none;
+            margin: 1em;
+        }
+
+    </style>
+    <script src="box.js"></script>
+    <script src="rectangle.js"></script>
+    <script src="circle.js"></script>
+    <script src="ellipse.js"></script>
+    <script src="polygon.js"></script>
+    <script src="polyline.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+<div id="content">
+
+    <div id="menu">Menu</div>
+
+    <ol id="tools">
+        <li onclick="changeShape('circle')">Circle</li>
+        <li onclick="changeShape('rectangle')">Rectangle</li>
+        <li onclick="changeShape('ellipse')">Ellipse</li>
+        <li onclick="changeShape('line')">Line</li>
+        <li onclick="changeShape('polygon')">Polygon</li>
+        <li onclick="changeShape('polyline')">Polyline</li>
+        <li onclick="confirm()">Confirm</li>
+        <li onclick="cancel()">Cancel</li>
+    </ol>
+
+    <ol id="colors">
+        <li class="color-red" onclick="changeFillColor('red')">Red</li>
+        <li class="color-green" onclick="changeFillColor('green')">Green</li>
+        <li class="color-blue" onclick="changeFillColor('blue')">Blue</li>
+        <li class="color-yellow" onclick="changeFillColor('yellow')">Yellow</li>
+    </ol>
+
+    <svg id="canvas"
+         onmousemove="onmousemoveCanvas(this, event)"
+         onmouseup="onclickCanvas(this, event)"
+         height="800"
+    >
+        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+        <rect x="100" y="100" width="150" height="150" style="fill:blue;stroke:green;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9" />
+        <ellipse cx="200" cy="80" rx="100" ry="50" style="fill:yellow;stroke:purple;stroke-width:2" />
+        <polygon points="300,380 400,300 300,500" style="fill:lime;stroke:purple;stroke-width:1" />
+        <polygon points="100,10 40,198 190,78 10,78 160,198" style="fill:lime;stroke:purple;stroke-width:5;fill-rule:nonzero;"/>
+    </svg>
+</div>
+
+</body>
+</html>
+
+
