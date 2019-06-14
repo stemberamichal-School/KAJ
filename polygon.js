@@ -50,6 +50,10 @@ class Polygon {
         return element;
     }
 
+    needsConfirmation() {
+        return true;
+    }
+
     canConfirm() {
         return this.points.length > 1;
     }

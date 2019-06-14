@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    height: 100vh;
 }
 
 #content {
@@ -14,7 +13,7 @@ body {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    background-color: gray;
+    background-color: lightgray;
     border-top: 1px solid darkgray;
     border-bottom: 1px solid darkgray;
     padding: 0;
@@ -50,7 +49,6 @@ ol.color-options {
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-content: center;
-    background-color: gray;
 }
 
 #draw-context-menu {

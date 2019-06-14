@@ -23,8 +23,6 @@
             <li class="shape-option" onclick="changeShape(event, 'line')">Line</li>
             <li class="shape-option" onclick="changeShape(event, 'polygon')">Polygon</li>
             <li class="shape-option" onclick="changeShape(event, 'polyline')">Polyline</li>
-            <li class="shape-option" onclick="confirm()">Confirm</li>
-            <li class="shape-option" onclick="cancel()">Cancel</li>
         </ol>
     </div>
 
@@ -41,18 +39,12 @@
     <svg id="canvas"
          onmousemove="onmousemoveCanvas(this, event)"
          onmouseup="onclickCanvas(this, event)"
-    >
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
-        <rect x="100" y="100" width="150" height="150" style="fill:blue;stroke:green;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9" />
-        <ellipse cx="200" cy="80" rx="100" ry="50" style="fill:yellow;stroke:purple;stroke-width:2" />
-        <polygon points="300,380 400,300 300,500" style="fill:lime;stroke:purple;stroke-width:1" />
-        <polygon points="100,10 40,198 190,78 10,78 160,198" style="fill:lime;stroke:purple;stroke-width:5;fill-rule:nonzero;"/>
-    </svg>
+    ></svg>
 
     <div class="menu-slot">
         <ol id="draw-context-menu">
-            <li hidden class="draw-option confirm">Confirm</li>
-            <li hidden class="draw-option cancel">Cancel</li>
+            <li class="draw-option confirm" onclick="confirm()">Confirm</li>
+            <li class="draw-option cancel" onclick="cancel()">Cancel</li>
         </ol>
     </div>
 </div>

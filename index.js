@@ -34,6 +34,8 @@ window.onload = (event) => {
     // MARK: - Prepare stroke color options
     const strokeOptions = document.getElementById(colorOptions.strokeColorOptionsId);
     colorOptions.strokeColors.forEach((color, i) => strokeOptions.appendChild(createColorOption(color, i == 0, changeStrokeColor)));
+
+    setupDrawOptions();
 };
 
 function changeFillColor(event) {
@@ -95,6 +97,8 @@ function onclickCanvas(sender, event) {
         sender.appendChild(element);
         // TODO: adjust history
     }
+
+    setupDrawOptions()
 }
 
 function onmousemoveCanvas(sender, event) {
@@ -110,9 +114,30 @@ function onmousemoveCanvas(sender, event) {
     }
 
     context.temporaryShape = element;
+
+    setupDrawOptions();
+}
+
+function setupDrawOptions() {
+    const shape = context.selectedShape;
+    const confirmOption = document.querySelector(".draw-option.confirm");
+    const confirmVisible = shape.needsConfirmation() && shape.canConfirm();
+    confirmOption.hidden = !confirmVisible;
+
+    const cancelOption = document.querySelector(".draw-option.cancel");
+    const cancelVisible = shape.canCancel();
+    cancelOption.hidden = !cancelVisible;
+
+    console.log("setupDrawOptions");
+    if (confirmVisible) { console.log("Confirm visible"); }
+    if (cancelVisible) { console.log("Cancel visible"); }
 }
 
 function confirm() {
+    if (!context.selectedShape.needsConfirmation()) {
+        return;
+    }
+
     const element = context.selectedShape.confirm(context);
     const canvas = document.getElementById("canvas");
     canvas.appendChild(element);
@@ -126,6 +151,10 @@ function confirm() {
 }
 
 function cancel() {
+    if (!context.selectedShape.canCancel()) {
+        return;
+    }
+
     const canvas = document.getElementById("canvas");
     context.selectedShape.cancel();
 

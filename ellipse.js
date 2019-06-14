@@ -46,7 +46,7 @@ class Ellipse {
     }
 
     canCancel() {
-        return this.origin == true
+        return Boolean(this.origin);
     }
 
     cancel() {
