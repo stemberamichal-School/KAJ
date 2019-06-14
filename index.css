@@ -19,7 +19,7 @@ body {
     padding: 0;
 }
 
-.menu-slot hX {
+.menu-slot h1 {
     padding-left: 1em;
 }
 
@@ -88,4 +88,5 @@ li.color-option {
 .selected {
     border: 2px solid black;
     transform: scale(1.2);
+    transition: transform 200ms linear;
 }

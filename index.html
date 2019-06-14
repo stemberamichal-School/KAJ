@@ -14,8 +14,8 @@
 </head>
 <body>
 <div id="content">
-    <div class="menu-slot">
-        <hX>Shape:</hX>
+    <section class="menu-slot">
+        <h1>Shape</h1>
         <ol id="shape-options">
             <li class="shape-option selected" onclick="changeShape(event, 'rectangle')">Rectangle</li>
             <li class="shape-option" onclick="changeShape(event, 'circle')">Circle</li>
@@ -24,29 +24,29 @@
             <li class="shape-option" onclick="changeShape(event, 'polygon')">Polygon</li>
             <li class="shape-option" onclick="changeShape(event, 'polyline')">Polyline</li>
         </ol>
-    </div>
+    </section>
 
-    <div class="menu-slot">
-        <hX>Fill:</hX>
+    <section class="menu-slot">
+        <h1>Fill</h1>
         <ol id="fill-color-options" class="color-options"></ol>
-    </div>
+    </section>
 
-    <div class="menu-slot">
-        <hX>Stroke:</hX>
+    <section class="menu-slot">
+        <h1>Stroke</h1>
         <ol id="stroke-color-options" class="color-options"></ol>
-    </div>
+    </section>
 
     <svg id="canvas"
          onmousemove="onmousemoveCanvas(this, event)"
          onmouseup="onclickCanvas(this, event)"
     ></svg>
 
-    <div class="menu-slot">
+    <section class="menu-slot">
         <ol id="draw-context-menu">
             <li class="draw-option confirm" onclick="confirm()">Confirm</li>
             <li class="draw-option cancel" onclick="cancel()">Cancel</li>
         </ol>
-    </div>
+    </section>
 </div>
 
 </body>
