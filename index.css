@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+#content {
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+}
+
+.menu-slot {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    background-color: gray;
+    border-top: 1px solid darkgray;
+    border-bottom: 1px solid darkgray;
+    padding: 0;
+}
+
+.menu-slot hX {
+    padding-left: 1em;
+}
+
+#canvas {
+    background: white;
+    flex-grow: 1;
+}
+
+#shape-options {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.shape-option {
+    list-style: none;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+ol.color-options {
+    margin: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    background-color: gray;
+}
+
+#draw-context-menu {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+li.draw-option {
+    list-style: none;
+    padding: 1em;
+    margin: 0;
+    flex-grow: 1;
+    flex-basis: auto;
+    align-content: center;
+}
+
+.confirm {
+    background-color: greenyellow;
+}
+
+.cancel {
+    background-color: orangered;
+}
+
+li.color-option {
+    list-style: none;
+    margin: 1em;
+    width: 2em;
+    height: 2em;
+}
+
+.selected {
+    border: 2px solid black;
+    transform: scale(1.2);
+}

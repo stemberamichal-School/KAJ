@@ -1,22 +1,62 @@
+const colorOptions = {
+    fillColors: ["black", "white", "red", "green", "blue", "yellow", "transparent"],
+    fillColorOptionsId: "fill-color-options",
+    strokeColors: ["black", "white", "red", "green", "blue", "yellow", "transparent"],
+    strokeColorOptionsId: "stroke-color-options",
+    colorAttribute: "data-color",
+    selectedClassName: "selected",
+    optionClassName: "color-option"
+};
+
 const context = {
     selectedShape: new Rectangle(),
     temporaryShape: undefined,
     styles: {
-        strokeColor: "red",
-        fillColor: "red",
+        fillColor: colorOptions.strokeColors[0],
+        strokeColor: colorOptions.strokeColors[0],
     }
 };
 
-// MARK: - Settings
-function changeStrokeColor(color) {
-    context.styles.strokeColor = color;
-}
+// MARK: - Prepare color pickers
+window.onload = (event) => {
+    const createColorOption = (color, selected, onclick) => {
+        const option = document.createElement("li");
+        option.setAttribute(colorOptions.colorAttribute, color);
+        option.style.backgroundColor = color;
+        option.className = colorOptions.optionClassName;
+        if (selected) { option.classList.add(colorOptions.selectedClassName) }
+        option.onclick = onclick;
+        return option;
+    };
+    // MARK: - Prepare fill color options
+    const fillOptions = document.getElementById(colorOptions.fillColorOptionsId);
+    colorOptions.fillColors.forEach((color, i) => fillOptions.appendChild(createColorOption(color, i == 0, changeFillColor)));
+    // MARK: - Prepare stroke color options
+    const strokeOptions = document.getElementById(colorOptions.strokeColorOptionsId);
+    colorOptions.strokeColors.forEach((color, i) => strokeOptions.appendChild(createColorOption(color, i == 0, changeStrokeColor)));
+};
 
-function changeFillColor(color) {
+function changeFillColor(event) {
+    const color = event.target.getAttribute(colorOptions.colorAttribute);
     context.styles.fillColor = color;
+
+    const allOptions = document.querySelectorAll("#" + colorOptions.fillColorOptionsId + " ." + colorOptions.optionClassName);
+    allOptions.forEach(o => o.classList.remove(colorOptions.selectedClassName));
+    event.target.classList.add(colorOptions.selectedClassName);
 }
 
-function changeShape(shape) {
+function changeStrokeColor(event) {
+    const color = event.target.getAttribute(colorOptions.colorAttribute);
+    context.styles.strokeColor = color;
+
+    const allOptions = document.querySelectorAll("#" + colorOptions.strokeColorOptionsId + " ." + colorOptions.optionClassName);
+    allOptions.forEach(o => o.classList.remove(colorOptions.selectedClassName));
+    event.target.classList.add(colorOptions.selectedClassName);
+}
+
+// Changing shape
+
+function changeShape(event, shape) {
     switch (shape) {
 
         case "circle":
@@ -36,6 +76,10 @@ function changeShape(shape) {
             context.selectedShape = new Rectangle();
             break;
     }
+
+    const allShapes = document.querySelectorAll(".shape-option.selected")
+    allShapes.forEach(e => e.classList.remove("selected"));
+    event.target.classList.add("selected");
 }
 
 // MARK: - Drawing

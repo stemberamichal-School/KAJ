@@ -23,15 +23,13 @@ class Size {
 class Box {
     constructor(point1, point2) {
 
-        let minX = Math.min(point1.x, point2.x);
-        let minY = Math.min(point1.y, point2.y);
-        let maxX = Math.max(point1.x, point2.x);
-        let maxY = Math.max(point1.y, point2.y);
+        const minX = Math.min(point1.x, point2.x);
+        const minY = Math.min(point1.y, point2.y);
+        const maxX = Math.max(point1.x, point2.x);
+        const maxY = Math.max(point1.y, point2.y);
 
         this.origin = new Point(minX, minY);
         this.size = new Size(maxX - minX, maxY - minY);
-
-
     }
 
     center() {
