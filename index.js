@@ -89,14 +89,19 @@ function onclickCanvas(sender, event) {
     const location = normalizedClientLocation(sender, event);
     const element = context.selectedShape.didSelectLocation(location, context);
 
-    if (context.selectedShape.needsConfirmation()) {
-        context.temporaryShape = element;
+    if (context.temporaryShape) {
+        sender.removeChild(context.temporaryShape);
     }
 
-    if (element) {
-        sender.appendChild(element);
+    if (context.selectedShape.needsConfirmation()) {
+        context.temporaryShape = element;
+    } else if (element) {
+        context.temporaryShape = undefined;
         // TODO: adjust history
     }
+
+    sender.appendChild(element);
+
 
     setupDrawOptions()
 }
@@ -148,6 +153,8 @@ function confirm() {
     }
 
     // TODO: Adjust history
+
+    setupDrawOptions();
 }
 
 function cancel() {
@@ -162,4 +169,6 @@ function cancel() {
         canvas.removeChild(context.temporaryShape);
         context.temporaryShape = undefined;
     }
+
+    setupDrawOptions();
 }
