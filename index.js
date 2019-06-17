@@ -44,6 +44,7 @@ window.onresize = (event) => {
     // Then we set the value in the --vh custom property to the root of the document
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 };
+window.onresize(undefined);
 
 function changeFillColor(event) {
     const color = event.target.getAttribute(colorOptions.colorAttribute);
@@ -153,6 +154,8 @@ function ontouchstart(event) {
         const touch = event.touches[0];
         context.currentTouch = touch;
         onmousedownCanvas(touch.target, touch);
+    } else {
+        cancelTouch();
     }
 }
 
@@ -167,6 +170,8 @@ function ontouchmove(event) {
     if(newTouch) {
         context.currentTouch = newTouch;
         onmousemoveCanvas(newTouch.target, newTouch);
+    } else {
+        cancelTouch();
     }
 }
 
@@ -181,6 +186,8 @@ function ontouchend(event) {
     if(!newTouch) {
         context.currentTouch = undefined;
         onmouseupCanvas(touch.target, touch);
+    } else {
+        cancelTouch();
     }
 }
 
@@ -225,6 +232,11 @@ function confirm() {
     // TODO: Adjust history
 
     setupDrawOptions();
+}
+
+function cancelTouch() {
+    context.currentTouch = undefined;
+    cancel();
 }
 
 function cancel() {
