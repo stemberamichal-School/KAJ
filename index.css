@@ -9,13 +9,18 @@ body {
     align-items: stretch;
 }
 
+.menu {
+    display: flex;
+    flex-flow: row wrap;
+    background-color: lightgray;
+}
+
+
 .menu-slot {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    background-color: lightgray;
-    border-top: 1px solid darkgray;
-    border-bottom: 1px solid darkgray;
+    border: 1px solid darkgray;
     padding: 0;
 }
 

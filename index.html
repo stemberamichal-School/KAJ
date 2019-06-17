@@ -14,27 +14,30 @@
 </head>
 <body>
 <div id="content">
-    <section class="menu-slot">
-        <h1>Shape</h1>
-        <ol id="shape-options">
-            <li class="shape-option selected" onclick="changeShape(event, 'rectangle')">Rectangle</li>
-            <li class="shape-option" onclick="changeShape(event, 'circle')">Circle</li>
-            <li class="shape-option" onclick="changeShape(event, 'ellipse')">Ellipse</li>
-            <li class="shape-option" onclick="changeShape(event, 'line')">Line</li>
-            <li class="shape-option" onclick="changeShape(event, 'polygon')">Polygon</li>
-            <li class="shape-option" onclick="changeShape(event, 'polyline')">Polyline</li>
-        </ol>
-    </section>
+    <div class="menu">
+        <section class="menu-slot">
+            <h1>Shape</h1>
+            <ol id="shape-options">
+                <li class="shape-option selected" onclick="changeShape(event, 'rectangle')">Rectangle</li>
+                <li class="shape-option" onclick="changeShape(event, 'circle')">Circle</li>
+                <li class="shape-option" onclick="changeShape(event, 'ellipse')">Ellipse</li>
+                <li class="shape-option" onclick="changeShape(event, 'line')">Line</li>
+                <li class="shape-option" onclick="changeShape(event, 'polygon')">Polygon</li>
+                <li class="shape-option" onclick="changeShape(event, 'polyline')">Polyline</li>
+            </ol>
+        </section>
 
-    <section class="menu-slot">
-        <h1>Fill</h1>
-        <ol id="fill-color-options" class="color-options"></ol>
-    </section>
+        <section class="menu-slot">
+            <h1>Fill</h1>
+            <ol id="fill-color-options" class="color-options"></ol>
+        </section>
 
-    <section class="menu-slot">
-        <h1>Stroke</h1>
-        <ol id="stroke-color-options" class="color-options"></ol>
-    </section>
+        <section class="menu-slot">
+            <h1>Stroke</h1>
+            <ol id="stroke-color-options" class="color-options"></ol>
+        </section>
+    </div>
+
 
     <svg id="canvas"
          onmousemove="onmousemoveCanvas(this, event)"
