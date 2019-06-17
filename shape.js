@@ -70,7 +70,7 @@ class SimpleShape extends Shape {
 class ComplexShape extends Shape {
 
     constructor() {
-        super()
+        super();
         this.locations = []
     }
 

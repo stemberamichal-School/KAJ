@@ -209,10 +209,6 @@ function setupDrawOptions() {
     const cancelOption = document.querySelector(".draw-option.cancel");
     const cancelVisible = shape.canCancel();
     cancelOption.hidden = !cancelVisible;
-
-    console.log("setupDrawOptions");
-    if (confirmVisible) { console.log("Confirm visible"); }
-    if (cancelVisible) { console.log("Cancel visible"); }
 }
 
 function confirm() {
