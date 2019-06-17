@@ -35,6 +35,11 @@ window.onload = (event) => {
     const strokeOptions = document.getElementById(colorOptions.strokeColorOptionsId);
     colorOptions.strokeColors.forEach((color, i) => strokeOptions.appendChild(createColorOption(color, i == 0, changeStrokeColor)));
 
+    const canvas = document.getElementById("canvas");
+    canvas.addEventListener("touchstart", ontouchstart, false);
+    canvas.addEventListener("touchmove", ontouchmove, false);
+    canvas.addEventListener("touchend", ontouchend, false);
+
     setupDrawOptions();
 };
 
@@ -109,11 +114,11 @@ function onmousedownCanvas(sender, event) {
     }
 
     setupDrawOptions();
+
+    event.preventDefault();
 }
 
 function onmousemoveCanvas(sender, event) {
-    event.preventDefault();
-
     if (context.temporaryShape) {
         sender.removeChild(context.temporaryShape);
         context.temporaryShape = undefined;
@@ -150,6 +155,32 @@ function onmouseupCanvas(sender, event) {
     sender.appendChild(element);
 
     setupDrawOptions()
+
+    event.preventDefault();
+}
+
+function ontouchstart(event) {
+    testSquare();
+
+    if (event.touches.length === 1) {
+        onmousedownCanvas(event.target, event.touches[0]);
+    }
+}
+
+function ontouchmove(event) {
+    testSquare();
+
+    if (event.touches.length === 1) {
+        onmousemoveCanvas(event.target, event.touches[0]);
+    }
+}
+
+function ontouchend(event) {
+    testSquare();
+
+    if (event.touches.length === 1) {
+        onmouseupCanvas(event.target. event.touches[0]);
+    }
 }
 
 function setupDrawOptions() {
@@ -200,4 +231,16 @@ function cancel() {
     }
 
     setupDrawOptions();
+}
+
+function testSquare() {
+    let canvas = document.getElementById("canvas");
+    let square = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    square.setAttribute("x", 20);
+    square.setAttribute("y", 20);
+    square.setAttribute("width", 50);
+    square.setAttribute("height", 50);
+    square.setAttribute("stroke", context.styles.strokeColor);
+    square.setAttribute("fill", context.styles.fillColor);
+    canvas.appendChild(square);
 }
