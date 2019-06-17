@@ -254,15 +254,3 @@ function cancel() {
 
     setupDrawOptions();
 }
-
-function testSquare() {
-    let canvas = document.getElementById("canvas");
-    let square = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    square.setAttribute("x", 20);
-    square.setAttribute("y", 20);
-    square.setAttribute("width", 50);
-    square.setAttribute("height", 50);
-    square.setAttribute("stroke", context.styles.strokeColor);
-    square.setAttribute("fill", context.styles.fillColor);
-    canvas.appendChild(square);
-}
