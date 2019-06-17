@@ -41,6 +41,9 @@
 
 
     <svg id="canvas"
+         ontouchstart="onmousedownCanvas(this, event)"
+         ontouchmove="onmousemoveCanvas(this, event)"
+         ontouchend="onmouseupCanvas(this, event)"
          onmousedown="onmousedownCanvas(this, event)"
          onmousemove="onmousemoveCanvas(this, event)"
          onmouseup="onmouseupCanvas(this, event)"
