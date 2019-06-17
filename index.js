@@ -38,6 +38,12 @@ window.onload = (event) => {
     setupDrawOptions();
 };
 
+window.onresize = (event) => {
+    let vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+
 function changeFillColor(event) {
     const color = event.target.getAttribute(colorOptions.colorAttribute);
     context.styles.fillColor = color;

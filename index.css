@@ -3,7 +3,8 @@ body {
 }
 
 #content {
-    height: 100vh;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
