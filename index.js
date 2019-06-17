@@ -42,6 +42,7 @@ window.onresize = (event) => {
     let vh = window.innerHeight * 0.01;
     // Then we set the value in the --vh custom property to the root of the document
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+    console.log("resized");
 };
 
 function changeFillColor(event) {
@@ -92,6 +93,8 @@ function changeShape(event, shape) {
 
 // MARK: - Drawing
 function onmousedownCanvas(sender, event) {
+    event.preventDefault();
+
     if (context.temporaryShape) {
         sender.removeChild(context.temporaryShape);
         context.temporaryShape = undefined;
@@ -109,6 +112,8 @@ function onmousedownCanvas(sender, event) {
 }
 
 function onmousemoveCanvas(sender, event) {
+    event.preventDefault();
+
     if (context.temporaryShape) {
         sender.removeChild(context.temporaryShape);
         context.temporaryShape = undefined;
@@ -126,6 +131,8 @@ function onmousemoveCanvas(sender, event) {
 }
 
 function onmouseupCanvas(sender, event) {
+    event.preventDefault();
+    
     if (context.temporaryShape) {
         sender.removeChild(context.temporaryShape);
         context.temporaryShape = undefined;
