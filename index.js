@@ -11,6 +11,7 @@ const colorOptions = {
 const context = {
     selectedShape: new Rectangle(),
     temporaryShape: undefined,
+    currentTouch: undefined,
     styles: {
         fillColor: colorOptions.strokeColors[0],
         strokeColor: colorOptions.strokeColors[0],
@@ -35,11 +36,6 @@ window.onload = (event) => {
     const strokeOptions = document.getElementById(colorOptions.strokeColorOptionsId);
     colorOptions.strokeColors.forEach((color, i) => strokeOptions.appendChild(createColorOption(color, i == 0, changeStrokeColor)));
 
-    const canvas = document.getElementById("canvas");
-    canvas.addEventListener("touchstart", ontouchstart, false);
-    canvas.addEventListener("touchmove", ontouchmove, false);
-    canvas.addEventListener("touchend", ontouchend, false);
-
     setupDrawOptions();
 };
 
@@ -47,7 +43,6 @@ window.onresize = (event) => {
     let vh = window.innerHeight * 0.01;
     // Then we set the value in the --vh custom property to the root of the document
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-    console.log("resized");
 };
 
 function changeFillColor(event) {
@@ -98,8 +93,6 @@ function changeShape(event, shape) {
 
 // MARK: - Drawing
 function onmousedownCanvas(sender, event) {
-    event.preventDefault();
-
     if (context.temporaryShape) {
         sender.removeChild(context.temporaryShape);
         context.temporaryShape = undefined;
@@ -114,8 +107,6 @@ function onmousedownCanvas(sender, event) {
     }
 
     setupDrawOptions();
-
-    event.preventDefault();
 }
 
 function onmousemoveCanvas(sender, event) {
@@ -136,8 +127,6 @@ function onmousemoveCanvas(sender, event) {
 }
 
 function onmouseupCanvas(sender, event) {
-    event.preventDefault();
-    
     if (context.temporaryShape) {
         sender.removeChild(context.temporaryShape);
         context.temporaryShape = undefined;
@@ -154,32 +143,53 @@ function onmouseupCanvas(sender, event) {
 
     sender.appendChild(element);
 
-    setupDrawOptions()
-
-    event.preventDefault();
+    setupDrawOptions();
 }
 
 function ontouchstart(event) {
-    testSquare();
+    console.log("ontouchstart");
 
     if (event.touches.length === 1) {
-        onmousedownCanvas(event.target, event.touches[0]);
+        const touch = event.touches[0];
+        context.currentTouch = touch;
+        onmousedownCanvas(touch.target, touch);
     }
 }
 
 function ontouchmove(event) {
-    testSquare();
+    console.log("ontouchmove");
 
-    if (event.touches.length === 1) {
-        onmousemoveCanvas(event.target, event.touches[0]);
+    const touch = context.currentTouch;
+    if (!touch) {
+        return;
+    }
+    const newTouch = newTouchFrom(event.touches, touch.identifier);
+    if(newTouch) {
+        context.currentTouch = newTouch;
+        onmousemoveCanvas(newTouch.target, newTouch);
     }
 }
 
 function ontouchend(event) {
-    testSquare();
+    console.log("ontouchend");
 
-    if (event.touches.length === 1) {
-        onmouseupCanvas(event.target. event.touches[0]);
+    const touch = context.currentTouch;
+    if (!touch) {
+        return;
+    }
+    const newTouch = newTouchFrom(event.touches, touch.identifier);
+    if(!newTouch) {
+        context.currentTouch = undefined;
+        onmouseupCanvas(touch.target, touch);
+    }
+}
+
+function newTouchFrom(touches, id) {
+    let i;
+    for (i = 0; i < touches.length; i++) {
+        if (id === touches[i].identifier) {
+            return touches[i];
+        }
     }
 }
 
