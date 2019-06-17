@@ -5,6 +5,7 @@
     <title>Draw</title>
     <link rel="stylesheet" type="text/css" href="index.css">
     <script src="box.js"></script>
+    <script src="shape.js"></script>
     <script src="rectangle.js"></script>
     <script src="circle.js"></script>
     <script src="ellipse.js"></script>
@@ -40,8 +41,9 @@
 
 
     <svg id="canvas"
+         onmousedown="onmousedownCanvas(this, event)"
          onmousemove="onmousemoveCanvas(this, event)"
-         onmouseup="onclickCanvas(this, event)"
+         onmouseup="onmouseupCanvas(this, event)"
     ></svg>
 
     <section class="menu-slot">

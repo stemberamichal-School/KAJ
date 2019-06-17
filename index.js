@@ -85,42 +85,58 @@ function changeShape(event, shape) {
 }
 
 // MARK: - Drawing
-function onclickCanvas(sender, event) {
-    const location = normalizedClientLocation(sender, event);
-    const element = context.selectedShape.didSelectLocation(location, context);
-
+function onmousedownCanvas(sender, event) {
     if (context.temporaryShape) {
         sender.removeChild(context.temporaryShape);
-    }
-
-    if (context.selectedShape.needsConfirmation()) {
-        context.temporaryShape = element;
-    } else if (element) {
         context.temporaryShape = undefined;
-        // TODO: adjust history
     }
 
-    sender.appendChild(element);
+    const location = normalizedClientLocation(sender, event);
+    const element = context.selectedShape.onmousedown(location, context);
 
+    if (element) {
+        context.temporaryShape = element;
+        sender.appendChild(element);
+    }
 
-    setupDrawOptions()
+    setupDrawOptions();
 }
 
 function onmousemoveCanvas(sender, event) {
     if (context.temporaryShape) {
         sender.removeChild(context.temporaryShape);
+        context.temporaryShape = undefined;
     }
 
     const location = normalizedClientLocation(sender, event);
-    const element = context.selectedShape.didSelectTemporaryLocation(location, context);
+    const element = context.selectedShape.onmousemove(location, context);
 
     if (element) {
+        context.temporaryShape = element;
         sender.appendChild(element);
     }
 
-    context.temporaryShape = element;
-
     setupDrawOptions();
+}
+
+function onmouseupCanvas(sender, event) {
+    if (context.temporaryShape) {
+        sender.removeChild(context.temporaryShape);
+        context.temporaryShape = undefined;
+    }
+
+    const location = normalizedClientLocation(sender, event);
+    const element = context.selectedShape.onmouseup(location, context);
+
+    if (context.selectedShape.needsConfirmation()) {
+        context.temporaryShape = element;
+    } else if (element) {
+        // TODO: adjust history
+    }
+
+    sender.appendChild(element);
+
+    setupDrawOptions()
 }
 
 function setupDrawOptions() {
